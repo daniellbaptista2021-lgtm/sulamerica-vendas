@@ -14,9 +14,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Check for Supabase auth cookie
-  const hasAuth = request.cookies.getAll().some(
-    (cookie) => cookie.name.includes('auth-token') || cookie.name.includes('sb-')
+  // Check for Supabase auth cookies (multiple patterns)
+  const cookies = request.cookies.getAll();
+  const hasAuth = cookies.some(
+    (cookie) =>
+      cookie.name.includes('sb-') &&
+      (cookie.name.includes('auth-token') || cookie.name.includes('access-token') || cookie.name.includes('refresh-token'))
   );
 
   if (!hasAuth) {
