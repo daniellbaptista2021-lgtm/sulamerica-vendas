@@ -3,7 +3,8 @@
 import { useChat } from 'ai/react';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Send, Bot, User, Menu, X, BookOpen, Target, MessageSquare, TrendingUp, Sparkles, BarChart3, ShoppingCart, Image as ImageIcon } from 'lucide-react';
+import { Send, Bot, User, Menu, X, BookOpen, Target, MessageSquare, TrendingUp, Sparkles, BarChart3, ShoppingCart, Image as ImageIcon, LogOut } from 'lucide-react';
+import { useAuth } from '@/lib/useAuth';
 
 const QUICK_ACTIONS = [
   { icon: BookOpen, label: 'Coberturas', prompt: 'Quais são todas as coberturas disponíveis no SulAmérica Vida Flex e seus limites de capital?' },
@@ -18,10 +19,21 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
+  const { user, loading: authLoading, logout } = useAuth();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!user) return null;
 
   const handleQuickAction = (prompt: string) => {
     setInput(prompt);
@@ -94,7 +106,10 @@ export default function ChatPage() {
             </div>
           </div>
 
-          <div className="p-4 border-t border-gray-800">
+          <div className="p-4 border-t border-gray-800 space-y-2">
+            <button onClick={logout} className="w-full flex items-center gap-2 p-2 rounded-lg text-xs text-gray-500 hover:bg-gray-800 hover:text-red-400 transition-colors">
+              <LogOut className="w-3.5 h-3.5" /> Sair
+            </button>
             <p className="text-xs text-gray-600 text-center">v1.0 - Base: SulAmérica Vida Flex</p>
           </div>
         </div>

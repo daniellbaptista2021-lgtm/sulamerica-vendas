@@ -24,9 +24,7 @@ export default function LoginPage() {
       setError('Email ou senha incorretos. Tente novamente.');
       setLoading(false);
     } else {
-      // Small delay to let Supabase set cookies before navigating
-      await new Promise(r => setTimeout(r, 500));
-      window.location.href = '/';
+      router.push('/');
     }
   };
 
