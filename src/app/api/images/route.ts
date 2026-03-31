@@ -1,12 +1,11 @@
 import OpenAI from 'openai';
 import { NextRequest, NextResponse } from 'next/server';
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
   try {
+    const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || '' });
     const { prompt, style } = await req.json();
 
     if (!prompt) {
