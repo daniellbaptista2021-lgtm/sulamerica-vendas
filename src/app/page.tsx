@@ -3,8 +3,9 @@
 import { useChat } from 'ai/react';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Send, Bot, User, Menu, X, BookOpen, Target, MessageSquare, TrendingUp, Sparkles, BarChart3, ShoppingCart, Image as ImageIcon, LogOut } from 'lucide-react';
+import { Send, User, Menu, X, BookOpen, Target, MessageSquare, TrendingUp, Sparkles, BarChart3, Image as ImageIcon, LogOut } from 'lucide-react';
 import { useAuth } from '@/lib/useAuth';
+import { CotacaoModal } from '@/components/CotacaoModal';
 
 const QUICK_ACTIONS = [
   { icon: TrendingUp, label: 'Fazer Cotação', prompt: 'Preciso fazer uma cotação de Assistência Funeral SulAmérica. Me pergunte os dados do cliente.' },
@@ -14,10 +15,30 @@ const QUICK_ACTIONS = [
   { icon: Sparkles, label: 'Dica de Venda', prompt: 'Me dê 5 dicas práticas para fechar mais vendas de Assistência Funeral esta semana.' },
 ];
 
+function AIAvatar({ className }: { className?: string }) {
+  return (
+    <div className={`relative ${className || ''}`}>
+      <div className="w-full h-full rounded-xl overflow-hidden" style={{ background: 'linear-gradient(135deg, #0054a6, #1a7fd4, #f58220)' }}>
+        <div className="w-full h-full flex items-center justify-center">
+          <svg viewBox="0 0 24 24" fill="none" className="w-[60%] h-[60%]" stroke="white" strokeWidth="1.5">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.15)"/>
+            <circle cx="9" cy="10" r="1.5" fill="white"/>
+            <circle cx="15" cy="10" r="1.5" fill="white"/>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+            <path d="M12 2v-1M22 12h1M2 12H1" stroke="white" strokeWidth="1" strokeLinecap="round" opacity="0.5"/>
+            <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="0.5" opacity="0.3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ChatPage() {
   const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showCotacao, setShowCotacao] = useState(false);
   const router = useRouter();
   const { user, loading: authLoading, logout } = useAuth();
 
@@ -38,7 +59,7 @@ export default function ChatPage() {
               }}
             />
             <div className="absolute inset-[2px] rounded-2xl bg-[#0a1628] flex items-center justify-center">
-              <Bot className="w-7 h-7 text-[#f58220]" />
+              <AIAvatar className="w-7 h-7" />
             </div>
           </div>
           <div className="flex gap-1.5">
@@ -96,9 +117,7 @@ export default function ChatPage() {
           <div className="flex items-center justify-between relative">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #0054a6, #1a7fd4)' }}>
-                  <Bot className="w-5 h-5 text-white" />
-                </div>
+                <AIAvatar className="w-10 h-10" />
                 <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#0d1d38]" />
               </div>
               <div>
@@ -128,7 +147,7 @@ export default function ChatPage() {
             {QUICK_ACTIONS.map((action, i) => (
               <button
                 key={i}
-                onClick={() => handleQuickAction(action.prompt)}
+                onClick={() => i === 0 ? setShowCotacao(true) : handleQuickAction(action.prompt)}
                 className="group w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-sm text-white/60 hover:text-white hover:bg-white/[0.04] transition-all duration-200"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
@@ -145,12 +164,6 @@ export default function ChatPage() {
               Ferramentas
             </p>
             <div className="space-y-1">
-              <button onClick={() => router.push('/vendas')} className="group w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-sm text-white/60 hover:text-white hover:bg-white/[0.04] transition-all duration-200" style={{ fontFamily: 'var(--font-body)' }}>
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:scale-105" style={{ background: 'rgba(16,185,129,0.12)' }}>
-                  <ShoppingCart className="w-4 h-4 text-emerald-400" />
-                </div>
-                <span className="font-medium">Minhas Vendas</span>
-              </button>
               <button onClick={() => router.push('/imagens')} className="group w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-sm text-white/60 hover:text-white hover:bg-white/[0.04] transition-all duration-200" style={{ fontFamily: 'var(--font-body)' }}>
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:scale-105" style={{ background: 'rgba(168,85,247,0.12)' }}>
                   <ImageIcon className="w-4 h-4 text-purple-400" />
@@ -221,11 +234,8 @@ export default function ChatPage() {
           </button>
           <div className="flex items-center gap-3 flex-1">
             <div className="relative">
-              <div
-                className="w-9 h-9 rounded-xl flex items-center justify-center animate-pulse-glow"
-                style={{ background: 'linear-gradient(135deg, #0054a6, #1a7fd4)' }}
-              >
-                <Bot className="w-4 h-4 text-white" />
+              <div className="w-9 h-9 animate-pulse-glow">
+                <AIAvatar className="w-9 h-9" />
               </div>
               <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0f2140]" />
             </div>
@@ -251,11 +261,8 @@ export default function ChatPage() {
             <div className="flex flex-col items-center justify-center h-full text-center px-4 animate-fade-in-up">
               {/* Hero icon */}
               <div className="relative mb-6">
-                <div
-                  className="w-20 h-20 rounded-3xl flex items-center justify-center animate-pulse-glow"
-                  style={{ background: 'linear-gradient(135deg, #0054a6 0%, #1a7fd4 50%, #f58220 100%)' }}
-                >
-                  <Bot className="w-10 h-10 text-white" />
+                <div className="w-20 h-20 rounded-3xl overflow-hidden animate-pulse-glow">
+                  <AIAvatar className="w-20 h-20" />
                 </div>
                 <div className="absolute -inset-3 rounded-[28px] opacity-20" style={{ background: 'linear-gradient(135deg, #0054a6, #f58220)', filter: 'blur(12px)' }} />
               </div>
@@ -281,7 +288,7 @@ export default function ChatPage() {
                 {QUICK_ACTIONS.map((action, i) => (
                   <button
                     key={i}
-                    onClick={() => handleQuickAction(action.prompt)}
+                    onClick={() => i === 0 ? setShowCotacao(true) : handleQuickAction(action.prompt)}
                     className="group relative flex items-center gap-3 p-4 rounded-2xl text-left text-sm transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 animate-fade-in-up btn-shine"
                     style={{
                       background: 'rgba(255,255,255,0.03)',
@@ -320,11 +327,8 @@ export default function ChatPage() {
               className={`flex gap-3 ${message.role === 'user' ? 'justify-end chat-user' : 'justify-start chat-assistant'}`}
             >
               {message.role === 'assistant' && (
-                <div
-                  className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 shadow-lg"
-                  style={{ background: 'linear-gradient(135deg, #0054a6, #1a7fd4)' }}
-                >
-                  <Bot className="w-4 h-4 text-white" />
+                <div className="w-8 h-8 flex-shrink-0 mt-1 shadow-lg">
+                  <AIAvatar className="w-8 h-8" />
                 </div>
               )}
               <div
@@ -367,11 +371,8 @@ export default function ChatPage() {
 
           {isLoading && (
             <div className="flex gap-3 chat-assistant">
-              <div
-                className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"
-                style={{ background: 'linear-gradient(135deg, #0054a6, #1a7fd4)' }}
-              >
-                <Bot className="w-4 h-4 text-white" />
+              <div className="w-8 h-8 flex-shrink-0 shadow-lg">
+                <AIAvatar className="w-8 h-8" />
               </div>
               <div
                 className="rounded-2xl rounded-bl-lg px-5 py-4"
@@ -476,10 +477,6 @@ export default function ChatPage() {
               style={{ background: 'linear-gradient(90deg, #0054a6, #f58220)', animation: 'fade-in-up 0.3s ease-out' }}
             />
           </button>
-          <button onClick={() => router.push('/vendas')} className="flex-1 flex flex-col items-center gap-0.5 py-2.5 text-white/30 hover:text-white/60 transition-colors">
-            <ShoppingCart className="w-5 h-5" />
-            <span className="text-[10px]" style={{ fontFamily: 'var(--font-body)' }}>Vendas</span>
-          </button>
           <button onClick={() => router.push('/imagens')} className="flex-1 flex flex-col items-center gap-0.5 py-2.5 text-white/30 hover:text-white/60 transition-colors">
             <ImageIcon className="w-5 h-5" />
             <span className="text-[10px]" style={{ fontFamily: 'var(--font-body)' }}>Imagens</span>
@@ -490,6 +487,10 @@ export default function ChatPage() {
           </button>
         </div>
       </div>
+
+      {showCotacao && (
+        <CotacaoModal onClose={() => setShowCotacao(false)} />
+      )}
     </div>
   );
 }
