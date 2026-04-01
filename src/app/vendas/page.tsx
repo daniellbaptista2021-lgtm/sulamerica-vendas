@@ -103,28 +103,42 @@ export default function VendasPage() {
     new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val);
 
   const statusColor: Record<string, string> = {
-    proposta: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
-    analise: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-    aprovada: 'bg-green-500/10 text-green-400 border-green-500/20',
+    proposta: 'bg-[#f58220]/10 text-[#f58220] border-[#f58220]/20',
+    analise: 'bg-[#0054a6]/10 text-[#1a7fd4] border-[#0054a6]/20',
+    aprovada: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
     recusada: 'bg-red-500/10 text-red-400 border-red-500/20',
     cancelada: 'bg-gray-500/10 text-gray-400 border-gray-500/20',
   };
 
+  const statusLabel: Record<string, string> = {
+    proposta: 'Proposta',
+    analise: 'Analise',
+    aprovada: 'Aprovada',
+    recusada: 'Recusada',
+    cancelada: 'Cancelada',
+  };
+
+  const inputClasses = "w-full bg-white/[0.03] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#0054a6]/50 input-glow transition-all duration-300";
+
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
-      <header className="border-b border-gray-800 bg-gray-900/50 px-4 py-3 flex items-center justify-between">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-[#0a1628] to-blue-950 text-white">
+      {/* Header */}
+      <header className="glass-strong sticky top-0 z-30 px-4 py-3 flex items-center justify-between">
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#0054a6] via-[#1a7fd4] to-[#f58220]" />
         <div className="flex items-center gap-3">
-          <button onClick={() => router.push('/')} className="text-gray-400 hover:text-white">
+          <button onClick={() => router.push('/')} className="text-gray-400 hover:text-white transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <h1 className="text-lg font-bold flex items-center gap-2">
-            <ShoppingCart className="w-5 h-5 text-blue-400" />
-            Minhas Vendas
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#0054a6] to-[#1a7fd4] flex items-center justify-center">
+              <ShoppingCart className="w-4 h-4 text-white" />
+            </div>
+            <span className="gradient-text">Minhas Vendas</span>
           </h1>
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg px-3 py-2 flex items-center gap-1.5"
+          className="btn-shine bg-gradient-to-r from-[#0054a6] to-[#1a7fd4] hover:from-[#0054a6] hover:to-[#f58220] text-white text-sm font-medium rounded-lg px-4 py-2 flex items-center gap-1.5 transition-all duration-300 shadow-lg shadow-[#0054a6]/20"
         >
           <Plus className="w-4 h-4" /> Nova Venda
         </button>
@@ -134,41 +148,50 @@ export default function VendasPage() {
         {/* Sales List */}
         {loading ? (
           <div className="flex justify-center py-12">
-            <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+            <div className="relative">
+              <div className="w-8 h-8 border-2 border-[#0054a6] border-t-[#f58220] rounded-full animate-spin" />
+              <div className="absolute inset-0 w-8 h-8 rounded-full animate-pulse-glow" />
+            </div>
           </div>
         ) : sales.length === 0 ? (
-          <div className="text-center py-16">
-            <ShoppingCart className="w-12 h-12 text-gray-700 mx-auto mb-3" />
+          <div className="text-center py-16 animate-fade-in-up">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0054a6]/20 to-[#f58220]/20 flex items-center justify-center mx-auto mb-4">
+              <ShoppingCart className="w-8 h-8 text-gray-500" />
+            </div>
             <p className="text-gray-500">Nenhuma venda registrada</p>
-            <button onClick={() => setShowForm(true)} className="text-blue-400 text-sm mt-2 hover:underline">
+            <button onClick={() => setShowForm(true)} className="text-[#1a7fd4] text-sm mt-2 hover:text-[#f58220] transition-colors">
               Registrar primeira venda
             </button>
           </div>
         ) : (
           <div className="space-y-3">
-            {sales.map((sale: any) => (
-              <div key={sale.id} className="bg-gray-900 border border-gray-800 rounded-xl p-4">
+            {sales.map((sale: any, idx: number) => (
+              <div
+                key={sale.id}
+                className="glass rounded-xl p-4 animate-fade-in-up hover:bg-white/[0.04] hover:border-[#0054a6]/20 transition-all duration-300 group"
+                style={{ animationDelay: `${idx * 60}ms`, opacity: 0 }}
+              >
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-semibold">{sale.client_name}</h3>
+                    <h3 className="font-semibold group-hover:text-[#1a7fd4] transition-colors">{sale.client_name}</h3>
                     <p className="text-xs text-gray-500 mt-0.5">
                       {sale.client_age ? `${sale.client_age} anos` : ''}
                       {sale.client_phone ? ` | ${sale.client_phone}` : ''}
                     </p>
                     <div className="flex flex-wrap gap-1 mt-2">
                       {sale.coverages?.map((c: string) => (
-                        <span key={c} className="text-[10px] bg-gray-800 text-gray-400 px-1.5 py-0.5 rounded">
+                        <span key={c} className="text-[10px] bg-[#0054a6]/10 text-[#1a7fd4] px-1.5 py-0.5 rounded border border-[#0054a6]/10">
                           {c}
                         </span>
                       ))}
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className={`text-xs px-2 py-1 rounded-full border ${statusColor[sale.status] || ''}`}>
-                      {sale.status}
+                    <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${statusColor[sale.status] || ''}`}>
+                      {statusLabel[sale.status] || sale.status}
                     </span>
                     {sale.monthly_premium && (
-                      <p className="text-sm font-semibold text-green-400 mt-1">
+                      <p className="text-sm font-semibold text-emerald-400 mt-1.5">
                         {formatCurrency(parseFloat(sale.monthly_premium))}/mes
                       </p>
                     )}
@@ -180,18 +203,18 @@ export default function VendasPage() {
                   </div>
                 </div>
                 {/* Status Actions */}
-                <div className="flex gap-2 mt-3 pt-3 border-t border-gray-800">
+                <div className="flex gap-2 mt-3 pt-3 border-t border-white/[0.06]">
                   {['proposta', 'analise', 'aprovada', 'recusada', 'cancelada'].map(s => (
                     <button
                       key={s}
                       onClick={() => updateStatus(sale.id, s)}
-                      className={`text-[10px] px-2 py-1 rounded ${
+                      className={`text-[10px] px-2.5 py-1 rounded-md transition-all duration-200 ${
                         sale.status === s
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-800 text-gray-500 hover:text-gray-300'
+                          ? 'bg-gradient-to-r from-[#0054a6] to-[#1a7fd4] text-white shadow-md shadow-[#0054a6]/20'
+                          : 'glass text-gray-500 hover:text-gray-300 hover:border-white/[0.12]'
                       }`}
                     >
-                      {s}
+                      {statusLabel[s] || s}
                     </button>
                   ))}
                 </div>
@@ -203,75 +226,81 @@ export default function VendasPage() {
 
       {/* New Sale Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-12 overflow-y-auto">
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl w-full max-w-lg p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold">Nova Venda</h2>
-              <button onClick={() => setShowForm(false)} className="text-gray-500 hover:text-white">
-                <X className="w-5 h-5" />
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-start justify-center p-4 pt-12 overflow-y-auto">
+          <div
+            className="glass-strong rounded-2xl w-full max-w-lg p-6 animate-fade-in-up shadow-2xl shadow-[#0054a6]/10"
+            style={{ opacity: 0, animationDelay: '50ms' }}
+          >
+            {/* Gradient header bar */}
+            <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-[#0054a6] via-[#1a7fd4] to-[#f58220]" />
+
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-lg font-bold gradient-text">Nova Venda</h2>
+              <button onClick={() => setShowForm(false)} className="glass rounded-lg p-1.5 text-gray-500 hover:text-white transition-colors">
+                <X className="w-4 h-4" />
               </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-3">
               <div>
-                <label className="block text-xs text-gray-400 mb-1">Nome do Cliente *</label>
+                <label className="block text-xs text-gray-400 mb-1 font-medium">Nome do Cliente *</label>
                 <input
                   required value={form.client_name}
                   onChange={e => setForm(f => ({ ...f, client_name: e.target.value }))}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className={inputClasses}
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs text-gray-400 mb-1">CPF</label>
+                  <label className="block text-xs text-gray-400 mb-1 font-medium">CPF</label>
                   <input
                     value={form.client_cpf}
                     onChange={e => setForm(f => ({ ...f, client_cpf: e.target.value }))}
-                    className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className={inputClasses}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-400 mb-1">Idade</label>
+                  <label className="block text-xs text-gray-400 mb-1 font-medium">Idade</label>
                   <input
                     type="number" value={form.client_age}
                     onChange={e => setForm(f => ({ ...f, client_age: e.target.value }))}
-                    className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className={inputClasses}
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs text-gray-400 mb-1">Telefone</label>
+                  <label className="block text-xs text-gray-400 mb-1 font-medium">Telefone</label>
                   <input
                     value={form.client_phone}
                     onChange={e => setForm(f => ({ ...f, client_phone: e.target.value }))}
-                    className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className={inputClasses}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-400 mb-1">Email</label>
+                  <label className="block text-xs text-gray-400 mb-1 font-medium">Email</label>
                   <input
                     type="email" value={form.client_email}
                     onChange={e => setForm(f => ({ ...f, client_email: e.target.value }))}
-                    className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className={inputClasses}
                   />
                 </div>
               </div>
 
               {/* Coverages */}
               <div>
-                <label className="block text-xs text-gray-400 mb-1">Coberturas</label>
+                <label className="block text-xs text-gray-400 mb-1.5 font-medium">Coberturas</label>
                 <div className="flex flex-wrap gap-1.5">
                   {COVERAGES.map(c => (
                     <button
                       key={c} type="button"
                       onClick={() => toggleCoverage(c)}
-                      className={`text-xs px-2 py-1 rounded-lg border transition-colors ${
+                      className={`text-xs px-2.5 py-1 rounded-lg border transition-all duration-200 ${
                         form.coverages.includes(c)
-                          ? 'bg-blue-600 border-blue-500 text-white'
-                          : 'bg-gray-800 border-gray-700 text-gray-400 hover:border-gray-600'
+                          ? 'bg-gradient-to-r from-[#0054a6] to-[#1a7fd4] border-[#0054a6]/50 text-white shadow-md shadow-[#0054a6]/20'
+                          : 'glass text-gray-400 hover:border-white/[0.15] hover:text-gray-300'
                       }`}
                     >
                       {c}
@@ -282,31 +311,31 @@ export default function VendasPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs text-gray-400 mb-1">Capital Segurado (R$)</label>
+                  <label className="block text-xs text-gray-400 mb-1 font-medium">Capital Segurado (R$)</label>
                   <input
                     type="number" value={form.capital}
                     onChange={e => setForm(f => ({ ...f, capital: e.target.value }))}
                     placeholder="200000"
-                    className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className={inputClasses}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-400 mb-1">Premio Mensal (R$)</label>
+                  <label className="block text-xs text-gray-400 mb-1 font-medium">Premio Mensal (R$)</label>
                   <input
                     type="number" step="0.01" value={form.monthly_premium}
                     onChange={e => setForm(f => ({ ...f, monthly_premium: e.target.value }))}
                     placeholder="89.90"
-                    className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className={inputClasses}
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs text-gray-400 mb-1">Pagamento</label>
+                <label className="block text-xs text-gray-400 mb-1 font-medium">Pagamento</label>
                 <select
                   value={form.payment_method}
                   onChange={e => setForm(f => ({ ...f, payment_method: e.target.value }))}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className={inputClasses}
                 >
                   <option value="">Selecione</option>
                   {PAYMENT_METHODS.map(m => (
@@ -316,18 +345,18 @@ export default function VendasPage() {
               </div>
 
               <div>
-                <label className="block text-xs text-gray-400 mb-1">Observacoes</label>
+                <label className="block text-xs text-gray-400 mb-1 font-medium">Observacoes</label>
                 <textarea
                   value={form.notes}
                   onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
                   rows={2}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
+                  className={`${inputClasses} resize-none`}
                 />
               </div>
 
               <button
                 type="submit" disabled={saving}
-                className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-800 text-white font-medium rounded-lg px-4 py-2.5 text-sm flex items-center justify-center gap-2"
+                className="w-full btn-shine bg-gradient-to-r from-[#0054a6] to-[#1a7fd4] hover:from-[#0054a6] hover:to-[#f58220] disabled:opacity-50 text-white font-medium rounded-lg px-4 py-2.5 text-sm flex items-center justify-center gap-2 transition-all duration-300 shadow-lg shadow-[#0054a6]/20"
               >
                 {saving ? (
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

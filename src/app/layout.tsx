@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Source_Sans_3, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
 
 export const metadata: Metadata = {
   title: "Flex IA - PV Corretora | Assistência Funeral SulAmérica",
-  description:
-    "Assistente de vendas para corretores PV Corretora - Assistência Funeral SulAmérica",
+  description: "Assistente de vendas para corretores PV Corretora - Assistência Funeral SulAmérica",
 };
 
 export default function RootLayout({
@@ -16,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
-      <body className={`${inter.className} bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100`}>
+    <html lang="pt-BR" className="dark">
+      <body className={`${sourceSans.variable} ${playfair.variable} font-sans bg-[#0a1628] text-gray-100 antialiased`}>
         {children}
       </body>
     </html>
