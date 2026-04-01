@@ -7,11 +7,11 @@ import { Send, Bot, User, Menu, X, BookOpen, Target, MessageSquare, TrendingUp, 
 import { useAuth } from '@/lib/useAuth';
 
 const QUICK_ACTIONS = [
-  { icon: BookOpen, label: 'Coberturas', prompt: 'Quais são todas as coberturas disponíveis no SulAmérica Vida Flex e seus limites de capital?' },
+  { icon: TrendingUp, label: 'Fazer Cotação', prompt: 'Preciso fazer uma cotação de Assistência Funeral SulAmérica. Me pergunte os dados do cliente.' },
+  { icon: BookOpen, label: 'Planos e Preços', prompt: 'Quais são todos os planos disponíveis, seus preços e o que cada um inclui?' },
   { icon: Target, label: 'Quebrar Objeção', prompt: 'O cliente disse que "é muito caro". Como quebro essa objeção?' },
-  { icon: MessageSquare, label: 'Script de Abordagem', prompt: 'Crie um script de abordagem para prospecção de novos clientes por WhatsApp para o Vida Flex.' },
-  { icon: TrendingUp, label: 'Cotação', prompt: 'Preciso fazer uma cotação. Quais dados do cliente preciso informar?' },
-  { icon: Sparkles, label: 'Dica de Venda', prompt: 'Me dê 5 dicas práticas para fechar mais vendas do Vida Flex esta semana.' },
+  { icon: MessageSquare, label: 'Script WhatsApp', prompt: 'Crie um script de abordagem para prospectar clientes por WhatsApp para a Assistência Funeral SulAmérica.' },
+  { icon: Sparkles, label: 'Dica de Venda', prompt: 'Me dê 5 dicas práticas para fechar mais vendas de Assistência Funeral esta semana.' },
 ];
 
 export default function ChatPage() {
@@ -98,10 +98,10 @@ export default function ChatPage() {
             <div className="mt-6">
               <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Exemplos</h2>
               <div className="space-y-2 text-xs text-gray-500">
-                <p>&quot;Cliente de 35 anos quer cobertura de morte e doenças graves, capital de 200 mil&quot;</p>
+                <p>&quot;Cliente de 42 anos, casado, 2 filhos de 8 e 15. Faz a cotação?&quot;</p>
                 <p>&quot;Como responder quando dizem que vão pensar?&quot;</p>
+                <p>&quot;Qual a diferença entre Familiar e Familiar Ampliado?&quot;</p>
                 <p>&quot;Crie um texto de divulgação para Instagram&quot;</p>
-                <p>&quot;Quais benefícios inclusos posso usar como argumento?&quot;</p>
               </div>
             </div>
           </div>
@@ -142,8 +142,8 @@ export default function ChatPage() {
               </div>
               <h2 className="text-xl font-bold text-white mb-2">Olá! Sou o Flex IA</h2>
               <p className="text-gray-400 max-w-md mb-6">
-                Seu assistente inteligente para vendas do SulAmérica Vida Flex.
-                Tire dúvidas, quebre objeções, faça cotações e muito mais.
+                Seu assistente de vendas PV Corretora - Assistência Funeral SulAmérica.
+                Faça cotações, tire dúvidas, quebre objeções e muito mais.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-lg">
                 {QUICK_ACTIONS.map((action, i) => (

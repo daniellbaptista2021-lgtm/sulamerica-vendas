@@ -1,110 +1,121 @@
 export const SULAMERICA_KNOWLEDGE_BASE = `
-# Base de Conhecimento - SulAmérica Vida Flex
+# Base de Conhecimento - Assistência Funeral SulAmérica (PV Corretora)
 
 ## Visão Geral do Produto
-O SulAmérica Vida Flex é um seguro de vida flexível e personalizável da SulAmérica, que se adapta a diferentes fases da vida. Combina proteção individual e familiar com benefícios exclusivos. Valores a partir de R$ 10/mês.
+Assistência Funeral SulAmérica é um plano de assistência funeral completo, com cobertura em todo o Brasil. A família não paga nada por fora. Inclui R$ 50.000 em caso de morte acidental, telemedicina e desconto em farmácias.
 
-## Faixas Etárias de Aceitação
-- Coberturas gerais: 14 a 70 anos
-- DIT (Diária por Incapacidade Temporária): 18 a 70 anos
-- DG (Doenças Graves): cancela aos 71 anos
+## Planos e Preços
 
-## Limites de Capital por Cobertura
+### Individual - R$ 29,90/mês
+- Apenas o titular
+- Telemedicina inclusa
+- Desconto em farmácias
 
-### Faixa 14-60 anos:
-| Cobertura | Capital Mínimo | Capital Máximo |
-|-----------|---------------|----------------|
-| Morte / Morte Acidental / IPA | R$ 10.000 | R$ 5.000.000 |
-| Doenças Graves (DG) | R$ 10.000 | R$ 1.000.000 |
-| Despesas Médico-Hospitalares (DMHO) | R$ 500 | R$ 20.000 |
-| Diária por Internação Hospitalar (DIH) | R$ 100 | R$ 150.000 |
-| Diária por Incapacidade Temporária (DIT) | R$ 1.000 | R$ 40.000 |
+### Titular + Cônjuge - R$ 59,90/mês
+- Titular e cônjuge
+- Telemedicina para os dois
+- Desconto em farmácias
 
-### Faixa 61-70 anos:
-| Cobertura | Capital Mínimo | Capital Máximo |
-|-----------|---------------|----------------|
-| Morte / Morte Acidental / IPA | R$ 10.000 | R$ 1.000.000 |
-| Doenças Graves (DG) | R$ 10.000 | R$ 500.000 |
-| Despesas Médico-Hospitalares (DMHO) | R$ 500 | R$ 10.000 |
-| Diária por Internação Hospitalar (DIH) | R$ 100 | R$ 150.000 |
-| Diária por Incapacidade Temporária (DIT) | R$ 1.000 | R$ 40.000 |
+### Familiar - R$ 59,90/mês
+- Titular, cônjuge e filhos até 21 anos
+- Telemedicina para toda a família
+- Desconto em farmácias
 
-## Coberturas Básicas
-1. **Morte (M)**: Indenização aos beneficiários em caso de falecimento natural ou acidental do segurado
-2. **Morte Acidental (MA)**: Proteção adicional específica para morte por acidente
-3. **Invalidez Permanente por Acidente (IPA)**: Perda total ou parcial de função de membro ou órgão por acidente
-4. **Funeral Individual (FI)**: Cobertura de despesas com funeral (reembolso ou prestação de serviço)
+### Familiar Ampliado - R$ 89,90/mês
+- Titular, cônjuge, filhos até 21 anos, pai, mãe, sogro e sogra
+- Telemedicina para toda a família
+- Desconto em farmácias
 
-## Coberturas Adicionais
-5. **Doenças Graves (DG)**: Indenização em caso de diagnóstico de doenças cobertas (AVC, Alzheimer, Câncer, Infarto, entre outras). Capital máximo de R$ 1M (14-60 anos) ou R$ 500K (61-70 anos)
-6. **Invalidez Funcional Permanente Total por Doença (IFPD)**: Perda de independência funcional por doença
-7. **Diária por Incapacidade Temporária (DIT)**: Pagamento diário enquanto temporariamente incapaz de trabalhar (18-70 anos)
-8. **Diária por Internação Hospitalar (DIH)**: Valor diário durante internação hospitalar
-9. **Despesas Médico-Hospitalares por Acidente (DMHO)**: Reembolso de despesas médicas após acidente
-10. **Acessibilidade Física (ACF)**: Custos de adaptação de residência/veículo após invalidez
-11. **Aquisição de Jazigo (AJ)**: Reembolso para compra de jazigo/cripta
-12. **Morte do Cônjuge (MCJ)**: Capital de até R$ 450.000
-13. **Filhos Póstumos**: Cobertura para filhos nascidos após falecimento
+## Adicionais
+- Cada filho ACIMA de 21 anos: +R$ 8,00/mês por filho
+- Cada dependente extra (irmãos, netos, genro, nora, etc.): +R$ 10,00/mês por dependente
 
-## Benefícios Inclusos (Sem Custo Adicional)
-1. **Médico na Tela Familiar**: Consultas médicas online 24/7 para o segurado e até 4 dependentes (cônjuge, filhos e pais)
-2. **Rede de Descontos em Farmácias**: Até 70% de desconto nas principais redes de farmácias do Brasil
-3. **Seguro Viagem Flex**: Cobertura gratuita de até 7 dias para viagens nacionais
-4. **Clube SulA Mais**: Plataforma exclusiva de benefícios para saúde, bem-estar emocional e financeiro
-5. **Sorteios Mensais**: Prêmios de R$ 15.000 nos sorteios da Loteria Federal
+## Regra de Idade
+- O TITULAR deve ter até 74 anos para contratar
+- Acima de 74 anos, a pessoa deve ser incluída como DEPENDENTE em uma apólice cujo titular tenha até 74 anos
 
-## Assistências Opcionais (Flex Combo)
-- Segunda opinião médica internacional para diagnósticos complexos
-- Apoio psicológico (invalidez, diagnóstico de câncer, luto)
-- Assistência residencial (chaveiro, eletricista, segurança, empregada doméstica)
-- Serviço "Faz-Tudo" (montagem de móveis, prateleiras, serviços elétricos)
-- Assistência infantil (babá, transporte escolar durante internação da mãe)
-- Orientação nutricional
-- Personal fitness online
+## Lógica de Seleção de Plano (para cotação)
+1. Se incluir PAIS ou SOGROS → Familiar Ampliado (R$ 89,90)
+2. Se incluir CÔNJUGE + FILHOS até 21 → Familiar (R$ 59,90)
+3. Se incluir apenas CÔNJUGE (sem filhos) → Titular + Cônjuge (R$ 59,90)
+4. Se incluir apenas FILHOS até 21 (sem cônjuge) → Familiar (R$ 59,90)
+5. Se não incluir ninguém → Individual (R$ 29,90)
+Depois soma: filhos acima de 21 × R$ 8,00 + dependentes extras × R$ 10,00
 
-## Assistências Adicionais (Custo Extra)
-- **Funeral Familiar**: Básico ou estendido (inclui pais e sogros)
-- **Assistência Bike**: Reparos, acessórios, orientação fitness/nutricional
-- **Cartão Alimentação Básica**: R$ 200/mês em crédito supermercado por 12 meses pós-falecimento
-- **Rede de Saúde Familiar**: Consultas e exames com desconto em diversas especialidades
+## Exemplos de Cotação
+- Titular 40 anos, sozinho = R$ 29,90/mês
+- Titular 35 anos + cônjuge = R$ 59,90/mês
+- Titular 42 anos + cônjuge + 2 filhos (8 e 15 anos) = R$ 59,90/mês
+- Titular 50 anos + cônjuge + 1 filho de 25 anos = R$ 59,90 + R$ 8,00 = R$ 67,90/mês
+- Titular 55 anos + cônjuge + filhos + pais + sogros = R$ 89,90/mês
+- Titular 60 anos + cônjuge + pais + 2 filhos (25 e 28) + 1 dependente extra = R$ 89,90 + R$ 16,00 + R$ 10,00 = R$ 115,90/mês
+
+## Coberturas e Benefícios Inclusos em TODOS os Planos
+
+### Assistência Funeral (Todo o Brasil)
+- Translado nacional
+- Ornamentação completa
+- Duas coroas de flores
+- Urnas exclusivas
+- Tanatopraxia (preparação do corpo)
+- Sepultamento em gaveta, carneiro ou cova
+- Cremação inclusa
+- Certidão de óbito
+- Taxas cemiteriais inclusas
+- Taxa de exumação inclusa
+
+### Benefícios Extras
+- R$ 50.000 em caso de morte acidental
+- Telemedicina (individual: para o titular / familiar: para toda a família)
+- Desconto em farmácias e medicamentos
+
+### Destaque Principal
+"A família não paga nada por fora!" - Todo o serviço funeral está coberto, sem custos adicionais.
 
 ## Formas de Pagamento
+- Boleto
 - PIX
+- Débito
 - Cartão de crédito
-- Débito automático
-- Até 12x sem juros
-- Cobrança mensal (apenas valor da parcela)
+- SEM taxa de adesão
 
-## Contratação
-- Cliente contrata através de COMBOS por faixas de capital
-- Flexibilidade para aumentar ou diminuir coberturas a qualquer momento
-- Maioria das coberturas NÃO cancela a apólice após sinistro
-- Algumas coberturas reintegram capital, outras cancelam a cobertura específica
-- CPF ativo obrigatório
+## Processo de Contratação (4 etapas)
+1. Documentação e proposta são enviadas ANTES de qualquer pagamento
+2. Cliente recebe a proposta e analisa todos os detalhes com calma
+3. Após revisar e aprovar, cliente faz o pagamento para ativar as coberturas
+4. Cliente recebe acesso ao Portal do Cliente SulAmérica
+
+## Opções de Proteção Complementar (Cross-sell)
+Para quem quer proteção ainda mais completa:
+- Seguro de vida por morte natural
+- Seguro para descoberta de doenças graves
+- Cobertura para cirurgias
+- Diária de internação hospitalar
+- E muito mais!
 
 ## Quebra de Objeções Comuns
 
 ### "É muito caro"
-→ A partir de R$ 10/mês. Menos que um café por dia para proteger toda a família. Pode ser parcelado em até 12x sem juros.
+→ A partir de R$ 29,90/mês. Menos de R$ 1 por dia. Um funeral particular custa de R$ 5.000 a R$ 15.000. Com o plano, a família não paga NADA por fora.
 
-### "Já tenho seguro de vida"
-→ O Vida Flex é complementar. Permite personalizar coberturas que seu seguro atual pode não ter, como Doenças Graves e Diária por Incapacidade.
+### "Já tenho plano funeral"
+→ Nosso plano inclui R$ 50.000 em caso de morte acidental + telemedicina + desconto em farmácias. Confira se o seu oferece tudo isso.
 
 ### "Sou jovem, não preciso"
-→ Quanto mais jovem, mais barato. E acidentes não escolhem idade. A cobertura de DIT protege sua renda caso fique temporariamente incapaz de trabalhar.
+→ Acidentes não escolhem idade. O plano cobre morte acidental com R$ 50.000 de indenização. E a telemedicina é um benefício que você usa todo mês.
 
 ### "Não confio em seguro"
-→ SulAmérica tem mais de 125 anos de mercado. É a maior seguradora independente do Brasil, regulada pela SUSEP.
+→ SulAmérica tem mais de 125 anos de mercado. É a maior seguradora independente do Brasil. Você recebe a proposta ANTES de pagar qualquer coisa.
 
 ### "Preciso pensar"
-→ Entendo perfeitamente. Posso fazer uma simulação rápida sem compromisso para você ver o valor exato? Assim você decide com informação concreta.
+→ Posso fazer uma cotação rápida sem compromisso? Assim você vê o valor exato e decide com calma. Lembrando: não tem taxa de adesão.
 
 ### "Meu marido/esposa precisa decidir junto"
-→ Ótimo! Inclusive o Médico na Tela cobre até 4 dependentes gratuitamente. Posso enviar uma proposta detalhada para vocês analisarem juntos?
+→ O plano Titular + Cônjuge é R$ 59,90 e já inclui telemedicina para os dois! Posso enviar a proposta para vocês analisarem juntos?
 
 ### "Não tenho dinheiro agora"
-→ São 12x sem juros, a partir de R$ 10/mês. O débito automático facilita. E o custo de NÃO ter seguro pode ser muito maior.
+→ Não tem taxa de adesão. R$ 29,90/mês no cartão ou débito. E o custo de NÃO ter é muito maior — um funeral particular chega a R$ 15.000.
 
 ### "Vou ver depois"
-→ O preço é calculado pela idade atual. Cada ano que passa, o valor sobe. Contratando hoje, você garante a menor tarifa possível.
+→ A proposta é enviada antes de qualquer pagamento. Não tem compromisso. Posso preparar agora e você analisa quando quiser?
 `;

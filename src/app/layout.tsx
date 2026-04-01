@@ -5,9 +5,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SulAmérica Vendas - Assistente IA",
+  title: "Flex IA - PV Corretora | Assistência Funeral SulAmérica",
   description:
-    "Assistente inteligente para vendedores SulAmérica Vida Flex",
+    "Assistente de vendas para corretores PV Corretora - Assistência Funeral SulAmérica",
 };
 
 export default function RootLayout({
