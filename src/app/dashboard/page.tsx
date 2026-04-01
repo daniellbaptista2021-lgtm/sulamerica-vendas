@@ -45,24 +45,12 @@ export default function DashboardPage() {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { router.push('/login'); return; }
 
-    // Get profile for role
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', user.id)
-      .single();
-
-    const role = profile?.role || 'vendedor';
-    setUserRole(role);
-
     const res = await fetch('/api/dashboard', {
-      headers: {
-        'x-user-id': user.id,
-        'x-user-role': role,
-      },
+      headers: { 'x-user-id': user.id },
     });
     const json = await res.json();
     setData(json);
+    setUserRole(json.role || 'vendedor');
     setLoading(false);
   }
 
